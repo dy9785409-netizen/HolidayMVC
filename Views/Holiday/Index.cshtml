@@ -1,0 +1,220 @@
+﻿@model List<HolidayApp.Models.Holiday>
+
+@{
+    var editHoliday =
+        ViewBag.EditHoliday as HolidayApp.Models.Holiday
+        ?? new HolidayApp.Models.Holiday();
+}
+
+<link rel="stylesheet" href="~/css/holiday.css" />
+
+<!-- HEADER -->
+<div class="page-header">
+    Holiday(s)
+</div>
+
+<!-- BREADCRUMB + EXIT -->
+<div class="breadcrumb-bar d-flex justify-content-between align-items-center">
+
+    <span>Masters > Holiday(s)</span>
+
+    <button class="btn btn-danger"
+            onclick="history.back()">
+        Exit
+    </button>
+
+</div>
+
+<div class="container-fluid mt-3">
+
+    <div class="row g-3">
+
+        <!-- LEFT PANEL -->
+        <div class="col-md-4">
+
+            <h3 class="section-title">
+                Add New Holiday(s)
+            </h3>
+
+            <div class="card holiday-card h-100">
+
+                 @* <h3 class="section-title">
+                    Add New Holiday(s)
+                </h3> *@ 
+
+                <form asp-action="Save" method="post">
+
+                    <input type="hidden"
+                           name="Id"
+                           value="@editHoliday.Id" />
+
+                    <label>ID</label>
+
+                    <input class="form-control mb-3"
+                           value="@(editHoliday.Id == 0 ? Model.Count + 1 : editHoliday.Id)"
+                           readonly />
+
+                    <label>English Name *</label>
+
+                    <input id="engName"
+                           name="EnglishName"
+                           value="@editHoliday.EnglishName"
+                           class="form-control mb-3"
+                           required />
+
+                    <label>Arabic Name *</label>
+
+                    <input id="arbName"
+                           name="ArabicName"
+                           value="@editHoliday.ArabicName"
+                           class="form-control mb-3"
+                           required />
+
+                    <div class="row mb-3">
+
+                        <div class="col">
+
+                            <label>From Date *</label>
+
+                            <input id="fromDate"
+                                   type="date"
+                                   name="FromDate"
+                                   value="@editHoliday.FromDate?.ToString("yyyy-MM-dd")"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                        <div class="col">
+
+                            <label>To Date *</label>
+
+                            <input id="toDate"
+                                   type="date"
+                                   name="ToDate"
+                                   value="@editHoliday.ToDate?.ToString("yyyy-MM-dd")"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-4">
+
+                        <button type="reset"
+                                class="btn btn-primary me-2">
+                            New
+                        </button>
+
+                        <button id="btnSave"
+                                type="submit"
+                                class="btn btn-success">
+                            Save
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="col-md-8" >
+            <h3 class="section-title">
+                List All Holiday(s)
+            </h3>
+
+            <div class="card holiday-card h-100">
+
+                @* <h3 class="section-title">
+                    List All Holiday(s)
+                </h3> *@
+
+                <div class="table-container">
+
+                    <table class="table table-bordered table-striped">
+
+                        <thead>
+
+                            <tr class="table-header">
+                                <th width="120">Action</th>
+                                <th>SNo</th>
+                                <th>Eng Name</th>
+                                <th>Arb Name</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @if (Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+
+                                            <a asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               class="text-danger me-2">
+                                                🗑️
+                                            </a>
+
+                                            <a asp-action="Edit"
+                                               asp-route-id="@item.Id"
+                                               class="text-primary">
+                                                ✏️
+                                            </a>
+
+                                        </td>
+
+                                        <td>@item.Id</td>
+
+                                        <td>@item.EnglishName</td>
+
+                                        <td>@item.ArabicName</td>
+
+                                        <td>
+                                            @item.FromDate?.ToString("dd-MM-yyyy")
+                                        </td>
+
+                                        <td>
+                                            @item.ToDate?.ToString("dd-MM-yyyy")
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+
+                                    <td colspan="6"
+                                        class="text-center">
+                                        No holidays found.
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/js/holiday.js"></script>

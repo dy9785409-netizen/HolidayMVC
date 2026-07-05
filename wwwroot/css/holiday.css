@@ -1,0 +1,60 @@
+﻿
+
+
+body {
+    background: #d9d8c8;
+}
+
+.page-header {
+    background: #2d7db7;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.breadcrumb-bar {
+    background: gray;
+    color: white;
+    padding: 12px;
+    font-size: 24px;
+    margin: 10px;
+}
+
+.holiday-card {
+    padding: 20px;
+    min-height: 700px;
+}
+
+h2 {
+    color: darkred;
+    font-weight: bold;
+}
+
+.table-container {
+    height: 650px;
+    overflow-y: auto;
+}
+
+thead {
+    background: #2d7db7;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.btn {
+    width: 110px;
+}
+
+.section-title {
+    color: crimson;
+}
+
+.table-header th{
+    background-color:blue !important;
+    color:white !important;
+    text-align:center;
+    verticle-align:middle;
+}
