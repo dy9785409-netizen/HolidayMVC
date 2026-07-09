@@ -72,7 +72,7 @@ Example:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER;Database=HolidayDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  "DefaultConnection": "Server=DINESHYADAV\SQLEXPRESS;Database=HolidayDB;Trusted_Connection=True;TrustServerCertificate=True;"
 }
 ```
 
